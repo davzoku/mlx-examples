@@ -44,7 +44,8 @@ def llama(model_path, *, dtype: str):
             raise ValueError("Invalid weight name")
         return mx.concatenate(v, axis=axis)
 
-    torch_files = glob.glob(str(model_path / "consolidated.*.pth"))
+    # torch_files = glob.glob(str(model_path / "consolidated.*.pth"))
+    torch_files = glob.glob(str(model_path / "*.bin"))
     weights = collections.defaultdict(list)
     for wf in torch_files:
         state = torch.load(wf, map_location=torch.device("cpu"))
@@ -58,7 +59,8 @@ def llama(model_path, *, dtype: str):
 
     for k, v in weights.items():
         weights[k] = unshard(k, v)
-    with open(model_path / "params.json", "r") as f:
+    # with open(model_path / "params.json", "r") as f:
+    with open(model_path / "config.json", "r") as f:
         params = json.loads(f.read())
     return weights, params
 
