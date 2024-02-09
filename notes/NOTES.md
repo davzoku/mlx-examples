@@ -15,7 +15,7 @@ python mistral.py --model-path ~/.cache/huggingface/hub/models--mlx-community--M
 
 ![mlx.png](mlx.png)
 
-### Conversion to mlx in Quantized form
+### Conversion to mlx in both fp16 and q4
 
 ```
 # torch-path == model path; mlx-path == output path
@@ -32,10 +32,7 @@ python -m mlx_lm.convert --hf-path davzoku/cria-llama2-7b-v1.3 --mlx-path cria-l
 python -m mlx_lm.convert --hf-path davzoku/cria-llama2-7b-v1.3 --mlx-path cria-llama2-7b-v1.3-mlx
 ```
 
-8 is q4
-9 is full bit
-
-#### Failed Conversions
+#### Failed Conversions Notes
 
 mainly due to redundant inv_freq
 
